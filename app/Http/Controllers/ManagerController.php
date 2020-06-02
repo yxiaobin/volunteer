@@ -9,6 +9,7 @@ use App\Userhelp;
 use App\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use phpDocumentor\Reflection\Types\Object_;
 use PhpParser\Node\Expr\Array_;
 use Session;
 
@@ -90,10 +91,32 @@ class ManagerController extends Controller
             $targets = $recommend[$name];//获取类别相似矩阵
             //dd($targets); //正常
             arsort($targets);//排序--倒序。
-            dd($targets); //正常----得到了一个逆向排序。
-            //求与此类最相似的志愿活动----6个。
+            $keyname = array_keys($targets);
+            //dd($keyname); //正常----得到了一个逆向排序。
+            $helps = [];//最终的推荐
+            foreach ($keyname as $key){
+                $caregoryid = Category::where('name','=',$key)->get()->first();
+                $objs = Help::where("categoryid",'=',$caregoryid->id)
+                                ->where("status",'=',"审核已通过")
+                                    ->where("endtime",'>=',now())
+                                        ->whereNotIn('id',function ($query) use ($user){
+                                            $query->select('helpid')->from('userhelp')->where('userid', '=',$user->id);
+                                        })
+                                        ->get();
+
+                if(count($helps)>=6){
+                    break;
+                }else{
+                    foreach ($objs as $obj){
+                        array_push($helps,$obj);
+                    }
+                }
+            } //求与此类最相似的志愿活动----6个。
+
+            $helps = (object)$helps;
+            $num = count((array)$helps);
         }
-        return view("Home.index");
+        return view("Home.index",compact('helps','num'));
     }
     //志愿者活动广场页面
     public function activity(){

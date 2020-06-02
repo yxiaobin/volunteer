@@ -29,6 +29,9 @@
 </head>
 <body>
 @if(session("rank")==0)
+        @php
+         $i =0;
+        @endphp
         <div class="welcome-left-container1 col-lg-9">
             <table class="layui-table" lay-even  >
                 <colgroup>
@@ -37,39 +40,32 @@
                     <col class="hidden-xs" width="90">
                 </colgroup>
                 {{--第一排--}}
-                <tr >
-                    <th class="hidden-xs">
-                        <p >  <img src="" alt="图片地址" width="90px" height="160px">
+                @foreach($helps as  $help)
+                    @if($i != $num && $i%3 == 0)<tr >@endif
+                    <th>
+                        <div >
+                            <div>
+                                <img src="{{url("getImage/$help->img")}}" alt="图片地址"height="160px">
+                                <div style="width: 70px;height: 30px;background-color: #FF6600;text-align: center;line-height: 30px;position: absolute; right: 1px; bottom:51px; ">
+                                    @php
+                                        $category = \App\Category::find($help->categoryid);
+                                    @endphp
+                                    <span style="color: white">{{$category->name}}</span>
+                                </div>
 
-                            <div style="width: 70px;height: 30px;background-color: #FF6600;text-align: center;line-height: 30px;position: absolute; right: 1px; bottom:51px; ">
-                                <span style="color: white">助教</span>
                             </div>
-                        </p>
-                        <hr>
-                        <span style="right: 0px;">
-                            <button class="layui-btn layui-btn-sm layui-btn-warm layui-btn-radius">查看详情</button>
-                         </span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                          <span>这个项目的简单介绍...</span>
-                    </th>
-                </tr>
-                {{--第二排--}}
-                <tr >
-                    <th class="hidden-xs">
-                        <p >  <img src="" alt="图片地址" width="90px" height="160px">
-
-                        <div style="width: 70px;height: 30px;background-color: #FF6600;text-align: center;line-height: 30px;position: absolute; right: 1px; bottom:51px; ">
-                            <span style="color: white">助教</span>
+                            <hr>
+                            <div style="right: 0px;">
+                                <span><button class="layui-btn layui-btn-sm layui-btn-warm layui-btn-radius">查看详情</button></span>
+                                <span>{!! str_limit($help->content,'30','...') !!}</span>
+                            </div>
                         </div>
-                        </p>
-                        <hr>
-                        <span style="right: 0px;">
-                            <button class="layui-btn layui-btn-sm layui-btn-warm layui-btn-radius">查看详情</button>
-                         </span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <span>这个项目的简单介绍...</span>
                     </th>
-                </tr>
+                    @if($i == $num-1 || $i%3 == 2)</tr >@endif
+                @php
+                    $i =$i+1;
+                @endphp
+                @endforeach
 
             </table>
         </div>
