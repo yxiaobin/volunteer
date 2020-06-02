@@ -36,7 +36,7 @@
                     <col class="hidden-xs" width="90">
                     <col class="hidden-xs" width="90">
                 </colgroup>
-
+                {{--第一排--}}
                 <tr >
                     <th class="hidden-xs">
                         <p >  <img src="" alt="图片地址" width="90px" height="160px">
@@ -53,7 +53,7 @@
                           <span>这个项目的简单介绍...</span>
                     </th>
                 </tr>
-
+                {{--第二排--}}
                 <tr >
                     <th class="hidden-xs">
                         <p >  <img src="" alt="图片地址" width="90px" height="160px">
@@ -157,7 +157,7 @@
 @endif
 
 
-        <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 <script src="{{asset("/layui/static/admin/layui/layui.js")}}" type="text/javascript" charset="utf-8"></script>
 <script src="{{asset("/layui/static/admin/lib/echarts/echarts.js")}}"></script>
 <script>
