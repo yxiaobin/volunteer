@@ -25,6 +25,9 @@
             -webkit-overflow-scrolling: touch;
             padding: 15px 0;
         }
+        .layui-table img{
+            max-width: 400px !important;
+        }
     </style>
 </head>
 <body>
@@ -44,20 +47,19 @@
                     @if($i != $num && $i%3 == 0)<tr >@endif
                     <th>
                         <div >
-                            <div>
-                                <img src="{{url("getImage/$help->img")}}" alt="图片地址"height="160px">
-                                <div style="width: 70px;height: 30px;background-color: #FF6600;text-align: center;line-height: 30px;position: absolute; right: 1px; bottom:51px; ">
+                            <div >
+                                <img src="{{url("getImage/$help->img")}}" alt="图片地址" height="200px" width=100%>
+                                <div style="width: 70px;height: 30px;background-color: #FF6600;text-align: center;line-height: 30px;position: absolute; right: 15px; bottom:63px; ">
                                     @php
                                         $category = \App\Category::find($help->categoryid);
                                     @endphp
                                     <span style="color: white">{{$category->name}}</span>
                                 </div>
-
                             </div>
                             <hr>
-                            <div style="right: 0px;">
+                            <div style="right: 0px;float: left;">
                                 <span><button class="layui-btn layui-btn-sm layui-btn-warm layui-btn-radius">查看详情</button></span>
-                                <span>{!! str_limit($help->content,'30','...') !!}</span>
+                                <div style = "float:right;line-height: 34px; margin-left: 12px;"> <span >{!! str_limit($help->content,'30','...') !!}   {{-- 周旋真好看--}} {{--{{$help->content}}--}}</span></div>
                             </div>
                         </div>
                     </th>
