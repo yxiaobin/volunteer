@@ -73,9 +73,12 @@
                         <td>
                             <div class="layui-inline" >
                                 <button class="layui-btn layui-btn-sm layui-btn-radius" ><a href="{{url("/activity/$help->id")}}">详情</a> </button>
-                                @if(session("msg")=="myhelp")
+                                @if(session("msg")=="qiuzhu")
                                     <button class="layui-btn-warm layui-btn-sm layui-btn-radius" ><a href="{{url("editactivity/$help->id")}}">修改</a> </button>
                                     <button class="layui-btn-danger layui-btn-sm layui-btn-radius" ><a href="{{url("deleteactivity/$help->id")}}" onclick="return confirm('确定要删除吗')">删除</a> </button>
+                                @endif
+                                @if(session("msg")=="canjia")
+                                    <button class="layui-btn-danger layui-btn-sm layui-btn-radius" ><a href="{{url("/quit/$help->id")}}" onclick="return confirm('确定要退出吗')">退出</a> </button>
                                 @endif
                             </div>
 

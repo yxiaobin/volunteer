@@ -54,7 +54,7 @@ class HelpController extends Controller
         $obj->delete();
         return back();
     }
-    //模糊查询---活动广场
+    //模糊查询---活动广场、我的求助和我报名的均已实现
     public function search(Request $request){
         //dd($request);
         switch ($request->input('leixing')){
@@ -100,5 +100,16 @@ class HelpController extends Controller
                 return view("home.activity",compact('helps'));
                 break;
         }
+    }
+    //退出
+    public  function  quit($id){
+        $p = Userhelp::where("helpid",'=',$id)->where("userid",'=',session('userid'))->get();
+        if(count($p)>0) $p = $p->first();
+        $help = Help::find($id);
+        $help->finish = $help->finish -1;
+        $help->save();
+        $p->delete();
+        echo "<div style='text-align: center;padding-top: 130px;color: black;'> 成功退出此活动！ <br><a href='/volunteer/public/myactivity'>
+        <span style='color: black;'>返回</span></a></div>";
     }
 }
