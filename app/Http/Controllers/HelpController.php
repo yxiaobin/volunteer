@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Help;
+use App\Userhelp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Session;
 class HelpController extends Controller
 {
     //
@@ -52,5 +53,52 @@ class HelpController extends Controller
     public function delete(Help $obj){
         $obj->delete();
         return back();
+    }
+    //模糊查询---活动广场
+    public function search(Request $request){
+        //dd($request);
+        switch ($request->input('leixing')){
+            case 'guangchang':
+                if($request->input("category")== 0){
+                    $helps = Help::where("title",'like','%'.$request->input('key')."%")->where("status","=","审核已通过")->orderby("starttime",'desc')->paginate(3);
+                    return view("home.activity",compact('helps'));
+                }else if($request->input("key")!= null){
+                    $helps = Help::where("title",'like','%'.$request->input('key').'%')->where("status","=","审核已通过")->where('categoryid','=',$request->input('catrgory'))->orderby("starttime",'desc')->paginate(3);
+                    return view("home.activity",compact('helps'));
+                }else {
+                    $helps = Help::where("status","=","审核已通过")->where('categoryid','=',$request->input('catrgory'))->orderby("starttime",'desc')->paginate(3);
+                    return view("home.activity",compact('helps'));
+                }
+                break;
+            case 'qiuzhu':
+                if($request->input("category")== 0){
+                    $helps = Help::where('userid','=',session('userid'))->where("title",'like','%'.$request->input('key')."%")->orderby("starttime",'desc')->paginate(3);
+                    return view("home.activity",compact('helps'));
+                }else if($request->input("key")!= null){
+                    $helps = Help::where('userid','=',session('userid'))->where("title",'like','%'.$request->input('key').'%')->where('categoryid','=',$request->input('catrgory'))->orderby("starttime",'desc')->paginate(3);
+                    return view("home.activity",compact('helps'));
+                }else {
+                    $helps = Help::where('userid','=',session('userid'))->where('categoryid','=',$request->input('catrgory'))->orderby("starttime",'desc')->paginate(3);
+                    return view("home.activity",compact('helps'));
+                }
+                break;
+            case 'canjia':
+                $ps = Userhelp::where("userid",'=',session('userid'))->get();
+                $helps = array();
+                foreach ($ps as $p){
+                    if($request->input("category")== 0){
+                        $keys = Help::where('id','=',$p->helpid)->where("title",'like','%'.$request->input("key").'%')->get();
+                    }else{
+                        $keys = Help::where('id','=',$p->helpid)->where("title",'like','%'.$request->input("key").'%')->where('categoryid','=',$request->input('catrgory'))->get();
+                    }
+                    foreach ($keys as $key){
+                        array_push($helps,$key);
+                    }
+                }
+
+                session::flash('fenye','no');
+                return view("home.activity",compact('helps'));
+                break;
+        }
     }
 }

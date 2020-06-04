@@ -14,17 +14,23 @@
 <body>
 <div class="wrap-container clearfix">
     <div class="column-content-detail">
-        <form class="layui-form" action="">
+        <form class="layui-form" action="{{url('/searchactivity')}}" method="post">
             <div class="layui-form-item">
+                {{csrf_field()}}
                 <div class="layui-inline">
-                    <input type="text" name="title"  placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    <input type="text" name="key"  placeholder="请输入标题" autocomplete="off" class="layui-input">
                 </div>
+                <input type="text" name="leixing" value="{{session("msg")}}" hidden>
+                @php
+                    $categorys = \App\Category::all();
+                @endphp
                 <div class="layui-inline">
-                    <select name="states" lay-filter="status">
-                        <option value="">请选择一个状态</option>
-                        <option value="010">正常</option>
-                        <option value="021">停止</option>
-                        <option value="0571">删除</option>
+                    <select name="category" lay-filter="status">
+                        <option value="0">类别不限</option>
+                        @foreach($categorys as $p)
+                        <option value="{{$p->id}}">{{$p->name}}</option>
+                        @endforeach
+
                     </select>
                 </div>
                 <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>

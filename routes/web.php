@@ -66,6 +66,8 @@ Route::get('/editactivity/{obj}',"HelpController@editindex");
 Route::post('/editactivity',"HelpController@editstore");
 //删除活动页面
 Route::get('/deleteactivity/{obj}',"HelpController@delete");
+//模糊搜索
+Route::post('/searchactivity',"HelpController@search");
 //------------------------UserController------------------------------------------//
 //用户认证页面
 route::get("/token","UserController@index");

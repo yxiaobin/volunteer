@@ -122,6 +122,7 @@ class ManagerController extends Controller
     public function activity(){
         //状态有 审核中、审核已通过、审核未通过、
         $helps = Help::where("status","=","审核已通过")->orderby("starttime",'desc')->paginate(3);
+        session(["msg"=>'guangchang']);
         return view("Home.activity",compact("helps"));
     }
     //发布新志愿编辑页面
@@ -132,7 +133,7 @@ class ManagerController extends Controller
     public function myhelp(){
         $userid=session("userid");
         $helps = Help::where("userid",'=',$userid)->orderby("starttime",'decs')->paginate(3);
-        session::flash('msg','myhelp');
+        session(["msg"=>'qiuzhu']);
         //dd($helps);
         return view("Home.activity",compact("helps"));
     }
@@ -168,6 +169,7 @@ class ManagerController extends Controller
             $key = Help::find($p->helpid);
             array_push($helps,$key);
         }
+        session(["msg"=>'canjia']);
         session::flash('fenye','no');
 
         return view("Home.activity",compact('helps'));
