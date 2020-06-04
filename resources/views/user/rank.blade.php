@@ -20,40 +20,34 @@
     </style>
 </head>
 <body>
+<h1 style="text-align: center; margin-top: 5%;">明星志愿者排行榜</h1>
 <div class="wrap-container welcome-container">
     <div class="row">
         <div class="welcome-left-container1 col-lg-9">
             <table class="layui-table" lay-even  >
                 <colgroup>
-                    <col class="hidden-xs" width="70">
+                    <col class="hidden-xs" width="50">
                     <col class="hidden-xs" width="140">
-                    <col class="hidden-xs" width="70">
+                    <col class="hidden-xs" width="100">
                     <col class="hidden-xs" width="140">
                 </colgroup>
+                @php
+                   $i = 0;
+                @endphp
+                @foreach($users as $user)
+
+                    @php
+                        $usr = $user['user'];
+                        $i = $i+1;
+                    @endphp
                 <tr>
-                    <th class="hidden-xs">姓名</th>
-                    <td class="hidden-xs"><strong>张大庄</strong></td>
-                    <th class="hidden-xs">名次</th>
-                    <td class="hidden-xs"><strong>1</strong></td>
+                    <th class="hidden-xs">{{$i}}</th>
+                    <th class="hidden-xs"><img src="{{url("getImage/$usr->image")}}" alt=""></th>
+                    <th class="hidden-xs">{{$user['user']->name}}</th>
+                    <th class="hidden-xs">共 {{$user['time']}} 次</th>
+                    <th class="hidden-xs">{{$user['user']->introduction}}</th>
                 </tr>
-                <tr>
-                    <th class="hidden-xs">姓名</th>
-                    <td class="hidden-xs"><strong>张大庄</strong></td>
-                    <th class="hidden-xs">名次</th>
-                    <td class="hidden-xs"><strong>2</strong></td>
-                </tr>
-                <tr>
-                    <th class="hidden-xs">姓名</th>
-                    <td class="hidden-xs"><strong>张大庄</strong></td>
-                    <th class="hidden-xs">名次</th>
-                    <td class="hidden-xs"><strong>3</strong></td>
-                </tr>
-                <tr>
-                    <th class="hidden-xs">姓名</th>
-                    <td class="hidden-xs"><strong>张大庄</strong></td>
-                    <th class="hidden-xs">名次</th>
-                    <td class="hidden-xs"><strong>4</strong></td>
-                </tr>
+                @endforeach
             </table>
         </div>
 

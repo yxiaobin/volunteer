@@ -46,7 +46,10 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">团队队长：</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" readonly   value="张三丰" autocomplete="off" class="layui-input">
+                            @php
+                                $user = \App\Users::find(session("userid"));
+                            @endphp
+                            <input type="text" name="title" readonly   value="{{$user->name}}" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                 </div>

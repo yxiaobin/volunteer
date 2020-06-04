@@ -23,18 +23,25 @@ class TeamController extends Controller
     }
     public function store(Request $request){
         //dd($request);
-        $team = new Team();
-        $team->name = $request->input('name');
-        $team->introduction = $request->input('introduction');
-        if($request->file("file") == "" ){
-            //空操作
+        $obj = Team::where("prim",'=',session("userid"))->get();
+        if(count($obj)>0){
+            echo "<div style='text-align: center;padding-top: 130px;color: black;'> 对不起，您已经有团队了不能在创建团队了！ <br><a href='javascript:history.go(-1)'>
+            <span style='color: black; font: bold;'>返回</span></a></div>";
         }else{
-            $team->image = $request->file('file')->store("images");
+            $team = new Team();
+            $team->name = $request->input('name');
+            $team->introduction = $request->input('introduction');
+            if($request->file("file") == "" ){
+                //空操作
+            }else{
+                $team->image = $request->file('file')->store("images");
+            }
+            $team->prim = session("userid");
+            $team->notice = "暂无内容！";
+            $team->save();
+            echo "<div style='text-align: center;padding-top: 130px;color: black;'> 团队创建完成，正在等待管理员的审核! <br><a href='javascript:history.go(-1)'>
+            <span style='color: black; font: bold;'>返回</span></a></div>";
         }
-        $team->prim = session("userid");
-        $team->notice = "暂无内容！";
-        $team->save();
-        echo "<div style='text-align: center;padding-top: 130px;'> 团队创建完成，正在等待管理员的审核!</div>";
 
     }
 }

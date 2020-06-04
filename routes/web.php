@@ -97,6 +97,8 @@ route::post("/newbbs","LuntanController@store");
 route::get("/mybbs","LuntanController@mybbs");
 //回复帖子
 route::post("/huifu","LuntanController@huifu");
+//删除帖子
+route::get("/bbsdelete/{obj}","LuntanController@delete");
 
 
 

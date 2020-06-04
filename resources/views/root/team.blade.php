@@ -65,8 +65,8 @@
 
                         <td>
                             <div class="layui-inline" >
-                                <button class="layui-btn layui-btn-sm layui-btn-radius" ><a href="{{url("tokenteam/$team->id/1")}}">通过</a> </button>
-                                <button class="layui-btn layui-btn-sm layui-btn-warm layui-btn-radius" ><a href="{{url("tokenteam/$team->id/2")}}">拒绝</a> </button>
+                                <button class="layui-btn layui-btn-sm layui-btn-radius" ><a href="{{url("tokenteam/$team->id/1")}}" onclick="return confirm('确定要通过审核吗？')">通过</a> </button>
+                                <button class="layui-btn layui-btn-sm layui-btn-warm layui-btn-radius" ><a href="{{url("tokenteam/$team->id/2")}}" onclick="return confirm('确定要拒绝吗？')">拒绝</a> </button>
                             </div>
                         </td>
                     </tr>

@@ -9,23 +9,29 @@ use App\Http\Controllers\Controller;
 
 class LuntanController extends Controller
 {
-    //
+    //所有帖子列表页面
     public function list(){
-        $objs = Bbs::where('preid','=','-1')->orderby("created_at",'desc')->get();
-        return view("bbs.list",compact('objs'));
+        $objs = Bbs::where('preid','=','-1')->orderby("created_at",'desc')->paginate(3);
+        $bbs = 0;
+        return view("bbs.list",compact('objs','bbs'));
     }
+    //我的帖子列表页面
     public function mybbs(){
-        $objs = Bbs::where("userid",'=',session("userid"))->orderby("created_at",'desc')->get();
-        return view("bbs.list",compact('objs'));
+        $objs = Bbs::where("userid",'=',session("userid"))->where('preid','=','-1')->orderby("created_at",'desc')->paginate(3);
+        $bbs  =1;
+        return view("bbs.list",compact('objs','bbs'));
     }
+    //某一个帖子的具体展示页面
     public function show(Bbs $obj){
         $user = Users::find($obj->userid);
         $objs = Bbs::where('preid','=',$obj->id)->orderby("id",'desc')->get();
         return view("bbs.date",compact("obj",'user','objs'));
     }
+    //新建帖子跳转页面
     public function new(){
         return view("bbs.new");
     }
+    //新建帖子存储逻辑
     public function store(Request $request){
         $obj = new Bbs();
         $obj->title = $request->input("title");
@@ -46,5 +52,10 @@ class LuntanController extends Controller
         $bbs->save();
         $msg = "发帖成功";
         return  $msg;
+    }
+    //删除帖子
+    public function delete(Bbs $obj){
+        $obj->delete();
+        return back();
     }
 }

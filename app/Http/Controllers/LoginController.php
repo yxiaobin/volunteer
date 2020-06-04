@@ -67,6 +67,8 @@ class LoginController extends Controller
             $user->email = $request->input("email");
             $user->password = md5($request->input("password")) ;
             $user->identity = "未认证用户";
+            $user->introduction = "该用户暂未设置他的个人简介";
+            $user->image = "images/001.jpeg";
             $user->save();
             $message = "数据添加成功";
             session::flash('registerWrong',2);

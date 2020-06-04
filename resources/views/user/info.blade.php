@@ -56,7 +56,10 @@
                             <th class="hidden-xs">加入时间</th>
                             <td class="hidden-xs " id="num">{{$obj->created_at}}</td>
                             <th class="hidden-xs">志愿次数</th>
-                            <td class="hidden-xs">999次</td>
+                            @php
+                             $userhelp = \App\Userhelp::where("userid",'=',$obj->id)->get();
+                            @endphp
+                            <td class="hidden-xs">共 {{count($userhelp)  }}次</td>
                         </tr>
                         <tr >
                             <th class="hidden-xs">个人简介</th>

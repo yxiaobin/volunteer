@@ -66,7 +66,7 @@
                      <a href="javascript:;" data-url="{{url("/tokenteam")}}" data-id='17' data-text="团队审核"><i class="iconfont">&#xe60b;</i>团队审核</a>
                  </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" data-url="{{url("/category")}}" data-id='18' data-text="志愿项目类别管理"><i class="iconfont">&#xe60e;</i>团队审核</a>
+                    <a href="javascript:;" data-url="{{url("/category")}}" data-id='18' data-text="志愿项目类别管理"><i class="iconfont">&#xe60e;</i>类别管理</a>
                 </li>
             @endif
 

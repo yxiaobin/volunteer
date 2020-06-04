@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Userhelp;
 use App\Users;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,15 @@ class UserController extends Controller
     }
     //明星榜
     public function rank(){
-        return view("user.rank");
+        $objs = Array();//最终结果集
+        $users = Users::all();//得到所有的用户
+        foreach($users as $user){
+            $p = Userhelp::where("userid",'=',$user->id)->get();
+            array_push($objs , ['time'=>count($p),'user'=>$user]);
+        }
+        array_multisort(array_column($objs,'time'),SORT_DESC,$objs);
+        $users = $objs;
+        return view("user.rank",compact('users'));
     }
     //用户修改页面
     public function update(Request $request){
@@ -48,6 +57,11 @@ class UserController extends Controller
             $user->tokenfiles = $request->file("file")->store("tokens");
         }
         $user->save();
-        echo "<div style='text-align: center;padding-top: 130px;'> 材料上传成功，正在等待管理员的审核!</div>";
+        echo " <div style='text-align: center;padding-top: 130px;'> 
+                材料上传成功，正在等待管理员的审核!
+                <br><a href='javascript:history.go(-1)'>
+                        <span style='color: black;'>返回</span>
+                    </a>
+                </div>";
     }
 }

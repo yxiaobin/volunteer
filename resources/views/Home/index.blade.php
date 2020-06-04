@@ -58,7 +58,7 @@
                             </div>
                             <hr>
                             <div style="right: 0px;float: left;">
-                                <span><button class="layui-btn layui-btn-sm layui-btn-warm layui-btn-radius">查看详情</button></span>
+                                <span> <a href="{{url("/activity/$help->id")}}"><button class="layui-btn layui-btn-sm layui-btn-warm layui-btn-radius">查看详情</button></a></span>
                                 <div style = "float:right;line-height: 34px; margin-left: 12px;"> <span >{!! str_limit($help->content,'30','...') !!}   {{-- 周旋真好看--}} {{--{{$help->content}}--}}</span></div>
                             </div>
                         </div>
