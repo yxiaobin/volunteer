@@ -163,14 +163,13 @@ class ManagerController extends Controller
     //我参加过的活动
     public function myactivity(){
         $ps = Userhelp::where("userid",'=',session('userid'))->get();
-        //dd($helps);
         $helps = array();
         foreach ($ps as $p){
             $key = Help::find($p->helpid);
             array_push($helps,$key);
         }
         session::flash('fenye','no');
-        //dd($helps);
+
         return view("Home.activity",compact('helps'));
     }
 

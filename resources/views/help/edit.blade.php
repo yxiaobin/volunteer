@@ -55,7 +55,7 @@
                     <label class="layui-form-label">活动类别：</label>
                     <div class="layui-input-block">
                         <div class="layui-inline" style="float: left">
-                            <select name="category" id="select1" class="layui-select">
+                            <select name="category" id="select1" class="layui-select" style="z-index: 999">
                                 @foreach($categorys as $p )
                                     <option value="{{$p->id}}" @if($p->id == $obj->categortid) selected @endif>{{$p->name}}</option>
                                 @endforeach
@@ -82,16 +82,16 @@
                 <div class="layui-form-item" >
                     <label class="layui-form-label">招募人数：</label>
                     <div class="layui-input-block">
-                        <div class="layui-input-inline">
-                            <input class="layui-input" type="text" required  lay-verify="number" name="num" placeholder="招募人数" value="{{$obj->num}}" >
+                        <div class="layui-input-inline" >
+                            <input  class="layui-input" type="text" required  lay-verify="number" name="num" placeholder="招募人数" value="{{$obj->num}}" >
                         </div>
                     </div>
                 </div>
 
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">文章内容：</label>
-                    <div class="layui-input-block">
-                        <div id="editor" type="text/plain" style="height: 400px;width: 100%;margin: auto">
+                    <div class="layui-input-block" style="z-index: 1">
+                        <div id="editor" type="text/plain" style="height: 400px;width: 100%;margin: auto;z-index: 2">
                         </div>
                     </div>
                 </div>

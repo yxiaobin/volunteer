@@ -9,7 +9,6 @@
     <title>网站后台管理模版</title>
     <link rel="stylesheet" type="text/css" href="{{asset("/layui/static/admin/layui/css/layui.css")}}" />
     <link rel="stylesheet" type="text/css" href="{{asset("/layui/static/admin/css/admin.css")}}" />
-
 </head>
 
 <body>
@@ -54,7 +53,7 @@
                     <label class="layui-form-label">活动类别：</label>
                     <div class="layui-input-block">
                         <div class="layui-inline" style="float: left">
-                            <select name="category" id="select1" class="layui-select">
+                            <select class="my_selected" data-edit-select="1" onmousedown="if(this.options.length>3){this.size=8}" onblur="this.size=0" onchange="this.size=0" style="position:absolute;z-index:999;"  name="category" id="select1" class="layui-select" >
                                 @foreach($categorys as $p )
                                 <option value="{{$p->id}}">{{$p->name}}</option>
                                 @endforeach
@@ -96,8 +95,8 @@
 
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">文章内容：</label>
-                        <div class="layui-input-block">
-                            <div id="editor" type="text/plain" style="height: 400px;width: 100%;margin: auto">
+                        <div class="layui-input-block" style="z-index: 2">
+                            <div  id="editor" type="text/plain" style="height: 400px;width: 100%;margin: auto; z-index: 2">
                             </div>
                         </div>
                     </div>
