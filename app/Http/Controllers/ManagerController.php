@@ -132,6 +132,7 @@ class ManagerController extends Controller
     public function myhelp(){
         $userid=session("userid");
         $helps = Help::where("userid",'=',$userid)->orderby("starttime",'decs')->paginate(3);
+        session::flash('msg','myhelp');
         //dd($helps);
         return view("Home.activity",compact("helps"));
     }

@@ -33,13 +33,13 @@
         <div class="layui-form" id="table-list">
             <table class="layui-table" lay-even lay-skin="nob">
                 <colgroup>
-                    <col class="hidden-xs" width="100">
-                    <col class="hidden-xs" width="170">
+                    <col class="hidden-xs" width="80">
                     <col class="hidden-xs" width="150">
+                    <col class="hidden-xs" width="130">
                     <col class="hidden-xs" width="100">
                     <col class="hidden-xs" width="80">
-                    <col width="50">
-                    <col width="30">
+                    <col width="20">
+                    <col width="150">
                 </colgroup>
                 <thead>
                 <tr>
@@ -66,8 +66,13 @@
                         <td><button class="layui-btn layui-btn-sm layui-btn-normal">{{$help->status}}</button></td>
                         <td>
                             <div class="layui-inline" >
-                                <button class="layui-btn layui-btn-sm layui-btn-radius" data-id="1"><a href="{{url("/activity/$help->id")}}">活动详情</a> </button>
+                                <button class="layui-btn layui-btn-sm layui-btn-radius" ><a href="{{url("/activity/$help->id")}}">详情</a> </button>
+                                @if(session("msg")=="myhelp")
+                                    <button class="layui-btn-warm layui-btn-sm layui-btn-radius" ><a href="{{url("editactivity/$help->id")}}">修改</a> </button>
+                                    <button class="layui-btn-danger layui-btn-sm layui-btn-radius" ><a href="{{url("deleteactivity/$help->id")}}" onclick="return confirm('确定要删除吗')">删除</a> </button>
+                                @endif
                             </div>
+
                         </td>
                     </tr>
                 @endforeach

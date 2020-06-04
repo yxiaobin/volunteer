@@ -43,7 +43,6 @@ Route::get('/getImage/{path}/{name}',"FileUploadController@getImage");
 //---------------------------ManagerController-------------------------------------//
 //后台管理界面
 Route::get('/manager',"ManagerController@index");
-
 //主页
 Route::get('/home',"ManagerController@home");
 //新增志愿活动页面
@@ -54,7 +53,6 @@ Route::get('/activity',"ManagerController@activity");
 Route::get('/myhelp',"ManagerController@myhelp");
 //活动详情
 Route::get('/activity/{obj}',"ManagerController@show");
-
 //报名
 Route::get('/join/{obj}',"ManagerController@join");
 //我参加过的活动
@@ -63,8 +61,11 @@ Route::get('/myactivity',"ManagerController@myactivity");
 //------------------------HelpController--------------------------------------------//
 //新添加请求帮助逻辑
 Route::post('/newhelp',"HelpController@add");
-
-
+//修改活动页面
+Route::get('/editactivity/{obj}',"HelpController@editindex");
+Route::post('/editactivity',"HelpController@editstore");
+//删除活动页面
+Route::get('/deleteactivity/{obj}',"HelpController@delete");
 //------------------------UserController------------------------------------------//
 //用户认证页面
 route::get("/token","UserController@index");
