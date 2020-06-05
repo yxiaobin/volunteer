@@ -106,10 +106,16 @@ class HelpController extends Controller
         $p = Userhelp::where("helpid",'=',$id)->where("userid",'=',session('userid'))->get();
         if(count($p)>0) $p = $p->first();
         $help = Help::find($id);
-        $help->finish = $help->finish -1;
-        $help->save();
-        $p->delete();
-        echo "<div style='text-align: center;padding-top: 130px;color: black;'> 成功退出此活动！ <br><a href='/volunteer/public/myactivity'>
+        if($help->endtime <now()){
+            echo "<div style='text-align: center;padding-top: 130px;color: red;'><h2>对不起, 该活动已结束，无法退出!</h2> <br><a href='/volunteer/public/myactivity'>
         <span style='color: black;'>返回</span></a></div>";
+        }else{
+            $help->finish = $help->finish -1;
+            $help->save();
+            $p->delete();
+            echo "<div style='text-align: center;padding-top: 130px;color: green;'> <h2>成功退出此活动！ </h2> <br><a href='/volunteer/public/myactivity'>
+        <span style='color: black;'>返回</span></a></div>";
+        }
+
     }
 }

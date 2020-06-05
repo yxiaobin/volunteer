@@ -11,8 +11,8 @@ class TeamController extends Controller
 {
     //团队广场
     public function index(){
-        $helps = new Help();
-        return view("team.index",compact('helps'));
+        $teams = Team::where("token",'=','审核已通过')->paginate(3);
+        return view("team.index",compact('teams'));
     }
     //我的团队
     public function myteam(){

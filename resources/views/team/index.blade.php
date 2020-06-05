@@ -14,22 +14,6 @@
 <body>
 <div class="wrap-container clearfix">
     <div class="column-content-detail">
-        <form class="layui-form" action="">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <input type="text" name="title"  placeholder="请输入标题" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-inline">
-                    <select name="states" lay-filter="status">
-                        <option value="">请选择一个状态</option>
-                        <option value="010">正常</option>
-                        <option value="021">停止</option>
-                        <option value="0571">删除</option>
-                    </select>
-                </div>
-                <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
-            </div>
-        </form>
         <div class="layui-form" id="table-list">
             <table class="layui-table" lay-even lay-skin="nob">
                 <colgroup>
@@ -42,41 +26,35 @@
                 </colgroup>
                 <thead>
                 <tr>
-
+                    <th class="hidden-xs">团队队徽</th>
                     <th class="hidden-xs">团队名称</th>
 
-                    <th class="hidden-xs">团队人数</th>
-                    <th class="hidden-xs">建立时间</th>
+                    <th class="hidden-xs">团队规模</th>
+
                     <th>团队简介</th>
                     <th>查看详情</th>
                 </tr>
                 </thead>
                 <tbody>
-
+                    @foreach($teams as $team)
                     <tr>
-                        <td class="hidden-xs"></td>
-                        <td style="color:#AAAAAA;"></td>
-                        <td class="hidden-xs"></td>
-                        <td class="hidden-xs"></td>
+                        <td class="hidden-xs"><img src="{{url("getImage/$team->image")}}" width="100px" height="100px" alt=""></td>
+                        <td class="hidden-xs">{{$team->name}}</td>
+                        <td >共可容纳 {{$team->num}} 人</td>
+                        <td style="color:#AAAAAA;">{{$team->introduction}}</td>
                         <td>
                             <div class="layui-inline" >
-                                <button class="layui-btn layui-btn-small layui-btn-radius" ><a href="">查看详情</a> </button>
+                                <button class="layui-btn layui-btn-sm layui-btn-radius" ><a href="">查看详情</a> </button>
                             </div>
                         </td>
                     </tr>
-
+                    @endforeach
                 </tbody>
             </table>
             <div class="page-wrap">
                 <ul class="pagination">
-                    <li class="disabled"><span>«</span></li>
-                    <li class="active"><span>1</span></li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">»</a>
-                    </li>
+                        {{ $teams->links() }}
+
                 </ul>
             </div>
         </div>

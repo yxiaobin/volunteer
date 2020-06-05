@@ -16,7 +16,7 @@ class CreateTeamTable extends Migration
         Schema::create('team', function (Blueprint $table) {
             $table->increments('id');
             $table->string("name");//团队名称
-            $table->string("prim")->nullable();//团队队长
+            $table->integer("prim")->nullable();//团队队长
             $table->string("notice");//团队公告
             $table->string("num")->default(50);//团队人数
             $table->string("image")->nullable();//团队队徽

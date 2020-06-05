@@ -15,8 +15,8 @@ class CreateRecommendTable extends Migration
     {
         Schema::create('recommend', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("userid");
-            $table->string("categoryid");
+            $table->integer("userid");
+            $table->integer("categoryid");
             $table->integer("value")->default(0);
         });
     }

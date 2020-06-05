@@ -50,7 +50,6 @@ class LoginController extends Controller
 
         }
 
-
     }
 
     //注册逻辑页面

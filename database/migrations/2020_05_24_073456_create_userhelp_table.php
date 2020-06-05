@@ -15,8 +15,8 @@ class CreateUserhelpTable extends Migration
     {
         Schema::create('userhelp', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("userid");
-            $table->string("helpid");
+            $table->integer("userid");
+            $table->integer("helpid");
             $table->string("time");
         });
     }

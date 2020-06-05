@@ -31,23 +31,25 @@
                     <col class="hidden-xs" width="140">
                 </colgroup>
                 <tr>
-                    <th class="hidden-xs">姓名</th>
-                    <td class="hidden-xs"><strong></strong></td>
-                    <th class="hidden-xs">邮箱</th>
-                    <td class="hidden-xs"><strong></strong></td>
+                    <th class="hidden-xs">名称</th>
+                    <td class="hidden-xs"><strong>公益小菊</strong></td>
+                    <th class="hidden-xs">队徽</th>
+                    <td class="hidden-xs" style="text-align: center"><img src="{{url("getImage/images/MALObgHXrZSihEEFQrTyGp7WYlkmS2DWLjhktWVO.jpeg")}}"  width="100px" height="100px" alt=""></td>
+
+
                 </tr>
                 <tr>
-                    <th class="hidden-xs">认证</th>
-                    <td class="hidden-xs">皇家理工</td>
-                    <th class="hidden-xs">加入时间</th>
-                    <td class="hidden-xs" id="num"></td>
+                    <th class="hidden-xs">公告</th>
+                    <td class="hidden-xs"><strong>大家一起报名2020年的义卖活动！，我们会为大家提供后勤保障服务的！</strong></td>
+                     <th class="hidden-xs">简介</th>
+                    <td class="hidden-xs" id="num">你好啊，志愿者们，我们一起努力吧</td>
                 </tr>
 
                 <tr >
-                    <th style="height: auto" class="hidden-xs">志愿次数</th>
-                    <td style="height: auto" class="hidden-xs">999次</td>
-                    <th class="hidden-xs">所属团队</th>
-                    <td class="hidden-xs">放飞梦想团队</td>
+                    <th style="height: auto" class="hidden-xs">活动次数</th>
+                    <td style="height: auto" class="hidden-xs">9次</td>
+                    <th class="hidden-xs">团队规模</th>
+                    <td class="hidden-xs">24人/40人</td>
                 </tr>
 
             </table>

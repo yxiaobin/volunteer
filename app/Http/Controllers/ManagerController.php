@@ -83,38 +83,43 @@ class ManagerController extends Controller
                     }
                 }
             }//求余弦
-            //dd($recommend); 正常
+            //dd($values); //正常
             //找出该用户最喜欢的某一类。
-            $targets = $values[$user->name];//找到该用户对所有的评分
-            arsort($targets);//排序--倒序。
-            $name = key($targets);//获取第一个健名。
-            $targets = $recommend[$name];//获取类别相似矩阵
-            //dd($targets); //正常
-            arsort($targets);//排序--倒序。
-            $keyname = array_keys($targets);
-            //dd($keyname); //正常----得到了一个逆向排序。
-            $helps = [];//最终的推荐
-            foreach ($keyname as $key){
-                $caregoryid = Category::where('name','=',$key)->get()->first();
-                $objs = Help::where("categoryid",'=',$caregoryid->id)
-                                ->where("status",'=',"审核已通过")
-                                    ->where("endtime",'>=',now())
-                                        ->whereNotIn('id',function ($query) use ($user){
-                                            $query->select('helpid')->from('userhelp')->where('userid', '=',$user->id);
-                                        })
-                                        ->get();
+            if (count($values)>0){
+                $targets = $values[$user->name];//找到该用户对所有的评分
+                arsort($targets);//排序--倒序。
+                $name = key($targets);//获取第一个健名。
+                $targets = $recommend[$name];//获取类别相似矩阵
+                //dd($targets); //正常
+                arsort($targets);//排序--倒序。
+                $keyname = array_keys($targets);
+                //dd($keyname); //正常----得到了一个逆向排序。
+                $helps = [];//最终的推荐
+                foreach ($keyname as $key){
+                    $caregoryid = Category::where('name','=',$key)->get()->first();
+                    $objs = Help::where("categoryid",'=',$caregoryid->id)
+                        ->where("status",'=',"审核已通过")
+                        ->where("endtime",'>=',now())
+                        ->whereNotIn('id',function ($query) use ($user){
+                            $query->select('helpid')->from('userhelp')->where('userid', '=',$user->id);
+                        })
+                        ->get();
 
-                if(count($helps)>=6){
-                    break;
-                }else{
-                    foreach ($objs as $obj){
-                        array_push($helps,$obj);
+                    if(count($helps)>=6){
+                        break;
+                    }else{
+                        foreach ($objs as $obj){
+                            array_push($helps,$obj);
+                        }
                     }
-                }
-            } //求与此类最相似的志愿活动----6个。
+                } //求与此类最相似的志愿活动----6个。
+                $helps = (object)$helps;
+                $num = count((array)$helps);
+            }else{
+                $helps = [];
+                $num = 0 ;
+            }
 
-            $helps = (object)$helps;
-            $num = count((array)$helps);
         }
         return view("Home.index",compact('helps','num'));
     }

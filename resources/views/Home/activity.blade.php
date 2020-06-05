@@ -49,7 +49,6 @@
                 </colgroup>
                 <thead>
                 <tr>
-
                     <th class="hidden-xs">活动名称</th>
                     <th>概要</th>
                     <th class="hidden-xs">开始时间-结束时间</th>
